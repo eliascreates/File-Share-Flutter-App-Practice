@@ -1,37 +1,38 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants.dart';
 
-class StorageInfoCard extends StatelessWidget {
-  const StorageInfoCard({
-    Key? key,
-    required this.title,
-    required this.svgSrc,
-    required this.amountOfFiles,
-    required this.numOfFiles,
-  }) : super(key: key);
+class StorageTile extends StatelessWidget {
+  const StorageTile(
+      {super.key,
+      required this.imageSrc,
+      required this.title,
+      required this.numFiles,
+      required this.spaceTaken});
 
-  final String title, svgSrc, amountOfFiles;
-  final int numOfFiles;
+  final String imageSrc, title;
+  final int numFiles;
+  final double spaceTaken;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: defaultPadding),
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(defaultPadding / 2),
       decoration: BoxDecoration(
-        border: Border.all(width: 2, color: primaryColor.withOpacity(0.15)),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(defaultPadding),
-        ),
+        border: Border.all(color: primaryColor.withOpacity(0.15)),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         children: [
           SizedBox(
             height: 20,
             width: 20,
-            child: SvgPicture.asset(svgSrc),
+            child: SvgPicture.asset(
+              imageSrc,
+            ),
           ),
           Expanded(
             child: Padding(
@@ -45,17 +46,17 @@ class StorageInfoCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    "$numOfFiles Files",
+                    "${numFiles} Files",
                     style: Theme.of(context)
                         .textTheme
-                        .caption!
-                        .copyWith(color: Colors.white70),
+                        .bodySmall
+                        ?.copyWith(color: Colors.white54),
                   ),
                 ],
               ),
             ),
           ),
-          Text(amountOfFiles)
+          Text("${spaceTaken} GB")
         ],
       ),
     );

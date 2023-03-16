@@ -1,60 +1,74 @@
+import 'package:admin/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+
+import '../../dashboard/components/storage_details.dart';
+import '../../storage/storage_screen.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        children: [
-          DrawerHeader(
-            child: Image.asset("assets/images/logo.png"),
-          ),
-          DrawerListTile(
-            title: "Dashboard",
-            svgSrc: "assets/icons/menu_dashbord.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Transaction",
-            svgSrc: "assets/icons/menu_tran.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Task",
-            svgSrc: "assets/icons/menu_task.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Documents",
-            svgSrc: "assets/icons/menu_doc.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Store",
-            svgSrc: "assets/icons/menu_store.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Notification",
-            svgSrc: "assets/icons/menu_notification.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Profile",
-            svgSrc: "assets/icons/menu_profile.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Settings",
-            svgSrc: "assets/icons/menu_setting.svg",
-            press: () {},
-          ),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            DrawerHeader(
+              child: Image.asset("assets/images/logo.png"),
+            ),
+            DrawerListTile(
+              press: () {},
+              imageSrc: "assets/icons/menu_dashboard.svg",
+              title: "Dashboard",
+            ),
+            DrawerListTile(
+              press: () {},
+              imageSrc: "assets/icons/menu_tran.svg",
+              title: "Transaction",
+            ),
+            DrawerListTile(
+              press: () {},
+              imageSrc: "assets/icons/menu_task.svg",
+              title: "Tasks",
+            ),
+            DrawerListTile(
+              press: () {},
+              imageSrc: "assets/icons/menu_doc.svg",
+              title: "Documents",
+            ),
+            DrawerListTile(
+              press: () {
+                if (Responsive.isMobile(context)) {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => StorageScreen(),
+                  ));
+                }
+              },
+              imageSrc: "assets/icons/menu_store.svg",
+              title: "Store",
+            ),
+            DrawerListTile(
+              press: () {},
+              imageSrc: "assets/icons/menu_notification.svg",
+              title: "Notification",
+            ),
+            DrawerListTile(
+              press: () {},
+              imageSrc: "assets/icons/menu_profile.svg",
+              title: "Profile",
+            ),
+            DrawerListTile(
+              press: () {},
+              imageSrc: "assets/icons/menu_setting.svg",
+              title: "Settings",
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -62,25 +76,24 @@ class SideMenu extends StatelessWidget {
 
 class DrawerListTile extends StatelessWidget {
   const DrawerListTile({
-    Key? key,
-    // For selecting those three line once press "Command+D"
+    super.key,
+    required this.imageSrc,
     required this.title,
-    required this.svgSrc,
     required this.press,
-  }) : super(key: key);
+  });
 
-  final String title, svgSrc;
+  final String imageSrc, title;
   final VoidCallback press;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       onTap: press,
-      horizontalTitleGap: 0.0,
+      horizontalTitleGap: 0,
       leading: SvgPicture.asset(
-        svgSrc,
+        imageSrc,
         color: Colors.white54,
-        height: 16,
+        height: 20,
       ),
       title: Text(
         title,

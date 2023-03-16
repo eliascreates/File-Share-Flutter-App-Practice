@@ -2,17 +2,17 @@ import 'package:admin/constants.dart';
 import 'package:flutter/material.dart';
 
 class CloudStorageInfo {
-  final String? svgSrc, title, totalStorage;
-  final int? numOfFiles, percentage;
-  final Color? color;
+  final String svgSrc, title, totalStorage;
+  final int numOfFiles, percentage;
+  final Color color;
 
   CloudStorageInfo({
-    this.svgSrc,
-    this.title,
-    this.totalStorage,
-    this.numOfFiles,
-    this.percentage,
-    this.color,
+    required this.svgSrc,
+    required this.title,
+    required this.totalStorage,
+    required this.numOfFiles,
+    required this.percentage,
+    required this.color,
   });
 }
 
@@ -42,7 +42,7 @@ List demoMyFiles = [
     percentage: 10,
   ),
   CloudStorageInfo(
-    title: "Documents",
+    title: "Drop Box",
     numOfFiles: 5328,
     svgSrc: "assets/icons/drop_box.svg",
     totalStorage: "7.3GB",

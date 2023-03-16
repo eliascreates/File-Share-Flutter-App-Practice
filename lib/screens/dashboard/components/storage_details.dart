@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-
 import '../../../constants.dart';
 import 'chart.dart';
-import 'storage_info_card.dart';
+import 'storage_tile.dart';
 
-class StarageDetails extends StatelessWidget {
-  const StarageDetails({
-    Key? key,
-  }) : super(key: key);
+class StorageDetails extends StatelessWidget {
+  const StorageDetails({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(defaultPadding),
+      width: double.infinity,
       decoration: BoxDecoration(
         color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,31 +27,31 @@ class StarageDetails extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          SizedBox(height: defaultPadding),
+          const SizedBox(height: defaultPadding),
           Chart(),
-          StorageInfoCard(
-            svgSrc: "assets/icons/Documents.svg",
-            title: "Documents Files",
-            amountOfFiles: "1.3GB",
-            numOfFiles: 1328,
+          StorageTile(
+            imageSrc: "assets/icons/Documents.svg",
+            title: "Document Files",
+            numFiles: 1329,
+            spaceTaken: 1.3,
           ),
-          StorageInfoCard(
-            svgSrc: "assets/icons/media.svg",
+          StorageTile(
+            imageSrc: "assets/icons/media.svg",
             title: "Media Files",
-            amountOfFiles: "15.3GB",
-            numOfFiles: 1328,
+            numFiles: 1328,
+            spaceTaken: 15.13,
           ),
-          StorageInfoCard(
-            svgSrc: "assets/icons/folder.svg",
+          StorageTile(
+            imageSrc: "assets/icons/folder.svg",
             title: "Other Files",
-            amountOfFiles: "1.3GB",
-            numOfFiles: 1328,
+            numFiles: 1329,
+            spaceTaken: 1.8,
           ),
-          StorageInfoCard(
-            svgSrc: "assets/icons/unknown.svg",
+          StorageTile(
+            imageSrc: "assets/icons/unknown.svg",
             title: "Unknown",
-            amountOfFiles: "1.3GB",
-            numOfFiles: 140,
+            numFiles: 1329,
+            spaceTaken: 1.3,
           ),
         ],
       ),

@@ -8,8 +8,8 @@ import '../../../constants.dart';
 
 class Header extends StatelessWidget {
   const Header({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,18 +17,21 @@ class Header extends StatelessWidget {
       children: [
         if (!Responsive.isDesktop(context))
           IconButton(
-            icon: Icon(Icons.menu),
             onPressed: context.read<MenuAppController>().controlMenu,
+            icon: Icon(Icons.menu),
           ),
         if (!Responsive.isMobile(context))
           Text(
             "Dashboard",
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
         if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
-        Expanded(child: SearchField()),
-        ProfileCard()
+        if (!Responsive.isDesktop(context)) SizedBox(width: defaultPadding),
+        Expanded(
+          child: SearchField(),
+        ),
+        if (!Responsive.isMobile(context)) ProfileCard()
       ],
     );
   }
@@ -36,35 +39,31 @@ class Header extends StatelessWidget {
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: defaultPadding),
       padding: EdgeInsets.symmetric(
-        horizontal: defaultPadding,
-        vertical: defaultPadding / 2,
-      ),
+          horizontal: defaultPadding, vertical: defaultPadding / 2),
       decoration: BoxDecoration(
-        color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        border: Border.all(color: Colors.white10),
-      ),
+          color: secondaryColor,
+          border: Border.all(color: Colors.white10),
+          borderRadius: BorderRadius.circular(10)),
       child: Row(
         children: [
           Image.asset(
             "assets/images/profile_pic.png",
             height: 38,
           ),
-          if (!Responsive.isMobile(context))
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-              child: Text("Angelina Jolie"),
-            ),
-          Icon(Icons.keyboard_arrow_down),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+            child:
+                (!Responsive.isMobile(context)) ? Text("Angelina Jolie") : null,
+          ),
+          Icon(Icons.keyboard_arrow_down)
         ],
       ),
     );
@@ -72,31 +71,32 @@ class ProfileCard extends StatelessWidget {
 }
 
 class SearchField extends StatelessWidget {
-  const SearchField({
-    Key? key,
-  }) : super(key: key);
+  const SearchField({super.key});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
         hintText: "Search",
-        fillColor: secondaryColor,
         filled: true,
+        fillColor: secondaryColor,
         border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide.none,
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
         suffixIcon: InkWell(
           onTap: () {},
-          child: Container(
-            padding: EdgeInsets.all(defaultPadding * 0.75),
-            margin: EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-            decoration: BoxDecoration(
-              color: primaryColor,
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
+          child: Padding(
+            padding: const EdgeInsets.only(right: defaultPadding / 2),
+            child: Container(
+              margin: (Responsive.isMobile(context))
+                  ? null
+                  : EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+              padding: EdgeInsets.symmetric(horizontal: defaultPadding * 1),
+              decoration: BoxDecoration(
+                  color: primaryColor, borderRadius: BorderRadius.circular(10)),
+              child: SvgPicture.asset("assets/icons/Search.svg"),
             ),
-            child: SvgPicture.asset("assets/icons/Search.svg"),
           ),
         ),
       ),
