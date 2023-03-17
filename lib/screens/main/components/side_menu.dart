@@ -1,9 +1,7 @@
 import 'package:admin/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
 
-import '../../dashboard/components/storage_details.dart';
 import '../../storage/storage_screen.dart';
 
 class SideMenu extends StatelessWidget {
@@ -18,7 +16,10 @@ class SideMenu extends StatelessWidget {
         child: Column(
           children: [
             DrawerHeader(
-              child: Image.asset("assets/images/logo.png"),
+              child: Image.asset(
+                "assets/images/exit.png",
+                color: Colors.grey,
+              ),
             ),
             DrawerListTile(
               press: () {},
